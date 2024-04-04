@@ -12,14 +12,15 @@
             localStorage.setItem('color-theme', 'light'); // Asegura que el modo claro esté activo por defecto
         }
     </script>
+    <link rel="stylesheet" href="css/style.css">
 </head>
 
-<body>
+<body class="">
     <nav class="border-gray-200 bg-gray-50 dark:bg-gray-800 dark:border-gray-700 shadow-lg sticky">
         <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
             <div class="flex gap-2 items-center justify-center">
-                <img src="/img/logo/logo-removebg-preview.png" alt="logo empresa" class="w-16">
-                <a href="#" class="flex items-center space-x-3 rtl:space-x-reverse">
+                <a href="/index.html" class="flex items-center space-x-3 rtl:space-x-reverse">
+                    <img src="/img/logo/logo-removebg-preview.png" alt="logo empresa" class="w-16">
                     <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">Parts</span>
                 </a>
                 <div class="relative hidden md:block">
@@ -104,33 +105,33 @@
         </div>
     </nav>
     <main class="min-h-screen">
-        <section class="h-96 flex flex-row my-4 max-w-5xl justify-center gap-2">
-            <div id="default-carousel" class="relative w-1/2 h-full" data-carousel="slide">
+        <section class="flex flex-col my-4 max-w-5xl justify-center gap-2 md:flex-row mx-2">
+            <div id="default-carousel" class="relative h-80 w-full md:h-96" data-carousel="slide">
                 <!-- Carousel wrapper -->
                 <div class="relative h-full overflow-hidden object-center rounded-lg">
                     <!-- Item 1 -->
                     <div class="hidden duration-700 ease-in-out" data-carousel-item>
-                        <img src="https://clubpcbox.com/wp-content/uploads/2021/12/nategentile18.jpg"
+                        <img src="/img/carrusel/oferta--1.jpg"
                             class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
                     </div>
                     <!-- Item 2 -->
                     <div class="hidden duration-700 ease-in-out" data-carousel-item>
-                        <img src="https://clubpcbox.com/wp-content/uploads/2021/12/nategentile18.jpg"
+                        <img src="/img/carrusel/oferta--2.webp"
                             class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
                     </div>
                     <!-- Item 3 -->
                     <div class="hidden duration-700 ease-in-out" data-carousel-item>
-                        <img src="https://clubpcbox.com/wp-content/uploads/2021/12/nategentile18.jpg"
+                        <img src="/img/carrusel/oferta--3.1.jpg"
                             class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
                     </div>
                     <!-- Item 4 -->
                     <div class="hidden duration-700 ease-in-out" data-carousel-item>
-                        <img src="https://clubpcbox.com/wp-content/uploads/2021/12/nategentile18.jpg"
+                        <img src="/img/carrusel/oferta--4.webp"
                             class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
                     </div>
                     <!-- Item 5 -->
                     <div class="hidden duration-700 ease-in-out" data-carousel-item>
-                        <img src="https://clubpcbox.com/wp-content/uploads/2021/12/nategentile18.jpg"
+                        <img src="/img/carrusel/oferta--5.webp"
                             class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
                     </div>
                 </div>
@@ -175,31 +176,53 @@
                     </span>
                 </button>
             </div>
-            <div>
+            <div class="w-1/2 flex gap-2">
                 <div
                     class="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-                    <a href="#">
-                        <img class="rounded-t-lg" src="/docs/images/blog/image-1.jpg" alt="" />
+                    <a href="/">
+                        <img class="w-60 mx-auto" src="img/ram/Memoria Ram 8gb ddr4 3200MHz HyperX Fury--ram--1.png"
+                            alt="Oferta ram" />
                     </a>
                     <div class="p-5">
                         <a href="#">
-                            <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Noteworthy
-                                technology acquisitions 2021</h5>
+                            <h5 class="mb-2 text-xl font-bold tracking-tight text-gray-900 dark:text-white">Kingston
+                            </h5>
                         </a>
-                        <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">Here are the biggest enterprise
-                            technology acquisitions of 2021 so far, in reverse chronological order.</p>
-                        <a href="#"
-                            class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                            Read more
-                            <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true"
-                                xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
-                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                    stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9" />
-                            </svg>
-                        </a>
+                        <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">Memoria Ram 8gb ddr4 3200MHz HyperX
+                            Fury</p>
+                    </div>
+                    <div class="flex flex-row justify-between items-center">
+                        <p class="mx-4 mb-2"><span class="line-through text-gray-500">$28.990</span> <span
+                                class="text-red-500">$22.990</span>
+                        </p>
+                        <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline mb-2 mx-4">Ver
+                            mas</a>
                     </div>
                 </div>
-
+                <div
+                    class="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+                    <a href="/">
+                        <img class="w-60 mx-auto"
+                            src="img/tarjeta_graficas/AMD Radeon RX550 4GB 128 bits GDDR5--gra--3.webp"
+                            alt="Oferta ram" />
+                    </a>
+                    <div class="p-5">
+                        <a href="#">
+                            <h5 class="mb-2 text-xl font-bold tracking-tight text-gray-900 dark:text-white">AMD Radeon
+                                550</h5>
+                            </h5>
+                        </a>
+                        <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">AMD Radeon RX550 4GB 128 bits GDDR5
+                        </p>
+                    </div>
+                    <div class="flex flex-row justify-center items-center">
+                        <p class="mx-4 mb-2"><span class="line-through text-gray-500">$55.990</span> <span
+                                class="text-red-500">$49.990</span>
+                        </p>
+                        <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline mb-2 mx-4">Ver
+                            mas</a>
+                    </div>
+                </div>
             </div>
         </section>
     </main>
