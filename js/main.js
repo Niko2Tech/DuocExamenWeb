@@ -54,4 +54,19 @@ document.addEventListener('DOMContentLoaded', () => {
             link.classList.add('text-gray-900', 'dark:text-gray-400', 'hover:bg-gray-100', 'dark:hover:bg-gray-700', 'dark:hover:text-white');
         }
     });
+    var checkboxes = document.querySelectorAll('.product-checkbox');
+
+    checkboxes.forEach(function (checkbox) {
+        checkbox.addEventListener('change', function () {
+            var total = 0;
+
+            document.querySelectorAll('.product-checkbox:checked').forEach(function (checkedBox) {
+                var priceText = checkedBox.closest('tr').querySelector('.product-price').innerText;
+                var price = parseInt(priceText.replace('$', '').replace(/\./g, ''), 10);
+                total += price;
+            });
+
+            document.getElementById('total-price').innerText = '$' + total.toLocaleString('es-CL');
+        });
+    });
 });
