@@ -31,29 +31,29 @@ document.addEventListener('DOMContentLoaded', () => {
 
     updateIcon(); // Actualiza el icono según el tema actual al cargar la página
     // Obtener la URL actual sin el dominio
-    var currentPath = window.location.pathname;
+    // Obtiene todos los elementos de enlace del navbar
+    const links = document.querySelectorAll('nav a');
 
-    // Seleccionar todos los enlaces dentro del contenedor ul
-    var links = document.querySelectorAll('ul.flex a');
+    // Obtiene la ruta actual del navegador
+    const currentPath = window.location.pathname;
 
-    // Iterar sobre cada enlace para verificar si su atributo href coincide con la URL actual
+    // Itera sobre cada enlace para ajustar las clases según si está activo o no
     links.forEach(function (link) {
-        console.log(link.getAttribute('href'));
-        if (link.getAttribute('href') == currentPath) {
-            // Si el enlace coincide con la URL actual, agregar clases para cambiar el color
-            // Agrega o modifica las clases según tus necesidades
-            link.classList.add('text-white', 'bg-blue-700'); // Para el modo claro
-            link.classList.add('dark:bg-blue-600'); // Para el modo oscuro
-            // Elimina las clases que ya no son necesarias
-            link.classList.remove('text-gray-900', 'dark:text-gray-400', 'hover:bg-gray-100', 'dark:hover:bg-gray-700', 'dark:hover:text-white');
+        // Extrae la ruta del atributo href del enlace
+        const linkPath = link.getAttribute('href');
+
+        if (linkPath === currentPath) {
+            // Si el enlace coincide con la URL actual, configura las clases para el estado activo
+            link.classList.add('text-white', 'bg-blue-700'); // Clases para el estado activo en modo claro
+            link.classList.add('md:bg-transparent', 'md:text-blue-700', 'md:dark:text-blue-500'); // Clases para el estado activo en responsive y modo oscuro
+            link.classList.remove('text-gray-900', 'dark:text-white', 'hover:bg-gray-100', 'md:hover:bg-transparent', 'md:hover:text-blue-700', 'md:dark:hover:text-blue-500', 'dark:hover:bg-gray-700', 'dark:hover:text-white', 'dark:border-gray-700'); // Elimina las clases para el estado inactivo
         } else {
-            // Si no coincide, asegúrate de que el enlace no tenga las clases de color activo
-            // Esto es útil si reutilizas este script para una SPA o aplicas cambios dinámicos en la página
-            link.classList.remove('text-white', 'bg-blue-700', 'dark:bg-blue-600');
-            // Asegúrate de que las clases para el estado no activo estén presentes
-            link.classList.add('text-gray-900', 'dark:text-gray-400', 'hover:bg-gray-100', 'dark:hover:bg-gray-700', 'dark:hover:text-white');
+            // Si no coincide, remueve las clases de estado activo y asegura que las de inactivo estén presentes
+            link.classList.remove('text-white', 'bg-blue-700', 'md:bg-transparent', 'md:text-blue-700', 'md:dark:text-blue-500');
+            link.classList.add('text-gray-900', 'hover:bg-gray-100', 'md:hover:bg-transparent', 'md:hover:text-blue-700', 'md:dark:hover:text-blue-500', 'dark:text-white', 'dark:hover:bg-gray-700', 'dark:hover:text-white', 'dark:border-gray-700'); // Añade las clases para el estado inactivo
         }
     });
+
     var checkboxes = document.querySelectorAll('.product-checkbox');
 
     checkboxes.forEach(function (checkbox) {
