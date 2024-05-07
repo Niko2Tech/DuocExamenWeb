@@ -17,7 +17,7 @@
 
 <body class="">
     <nav
-        class="bg-white dark:bg-gray-900 fixed w-full z-50 top-0 start-0 border-b border-gray-200 dark:border-gray-600">
+        class="bg-white dark:bg-gray-900 sticky w-full z-40 top-0 start-0 border-b border-gray-200 dark:border-gray-600">
         <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
             <a href="/index.html" class="flex items-center space-x-3 rtl:space-x-reverse">
                 <img src="/img/logo/logo-removebg-preview.png" class="h-8" alt="LogoParts">
@@ -102,7 +102,7 @@
         <section
             class="bg-white border border-gray-200 rounded-lg shadow mx-2 my-4 dark:bg-gray-800 dark:border-gray-700 flex">
             <!--   -->
-            <aside id="default-sidebar" class="w-64 h-screen" aria-label="Sidebar">
+            <aside id="default-sidebar" class="w-64 h-screen hidden md:block" aria-label="Sidebar">
                 <div class="h-full px-3 py-4 overflow-y-auto bg-gray-50 dark:bg-gray-800">
                     <ul class="space-y-2 font-medium">
                         <li class="my-2">
@@ -312,7 +312,7 @@
     </footer>
     <!-- modales -->
     <div id="drawer-contact"
-        class="fixed top-0 left-0 z-40 h-screen p-4 overflow-y-auto transition-transform -translate-x-full bg-white w-80 dark:bg-gray-800"
+        class="fixed top-0 left-0 z-50 h-screen p-4 overflow-y-auto transition-transform -translate-x-full bg-white w-80 dark:bg-gray-800"
         tabindex="-1" aria-labelledby="drawer-contact-label">
         <h5 id="drawer-label"
             class="inline-flex items-center mb-6 text-base font-semibold text-gray-500 uppercase dark:text-gray-400">
@@ -331,29 +331,51 @@
             </svg>
             <span class="sr-only">Close menu</span>
         </button>
-        <form class="mb-6">
+        <form id="contactForm" class="mb-6">
             <div class="mb-6">
                 <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Correo</label>
-                <input type="email" id="email"
+                <input type="email" id="email" name="email"
                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                    placeholder="nombre@pars.com" required />
+                    placeholder="nombre@pars.com" />
+                <p id="email-error" class="text-red-500 text-sm mt-1"></p>
             </div>
             <div class="mb-6">
                 <label for="subject" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Asunto</label>
-                <input type="text" id="subject"
+                <input type="text" id="subject" name="subject"
                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                    placeholder="Cuentanos en que podemos ayudarte" required />
+                    placeholder="Cuéntanos en qué podemos ayudarte" />
+                <p id="subject-error" class="text-red-500 text-sm mt-1"></p>
+            </div>
+            <div class="mb-6">
+                <label for="phone" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Teléfono</label>
+                <input type="tel" id="phone" name="phone"
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    placeholder="+56 938495435" />
+                <p id="phone-error" class="text-red-500 text-sm mt-1"></p>
             </div>
             <div class="mb-6">
                 <label for="message"
                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Mensaje</label>
-                <textarea id="message" rows="4"
+                <textarea id="message" name="message" rows="4"
                     class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     placeholder="Tu mensaje..."></textarea>
+                <p id="message-error" class="text-red-500 text-sm mt-1"></p>
             </div>
-            <button type="submit"
+            <div class="mb-6">
+                <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="file_user">Subir
+                    imagen</label>
+                <input
+                    class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
+                    aria-describedby="file_user_help" id="file_user" name="file_user" type="file"
+                    accept=".pdf,.png,.jpg,.jpeg">
+                <div class="mt-1 text-sm text-gray-500 dark:text-gray-300" id="file_user_help">Máximo 5MB - (PDF, PNG,
+                    JPG, JPEG)</div>
+                <p id="file-user-error" class="text-red-500 text-sm mt-1"></p>
+            </div>
+            <button type="submit" id="submit-button"
                 class="text-white bg-blue-700 hover:bg-blue-800 w-full focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800 block">Enviar
                 mensaje</button>
+            <p id="form-submit" class="text-green-500 hidden">Formulario enviado</p>
         </form>
         <p class="mb-2 text-sm text-gray-500 dark:text-gray-400">
             <a href="#" class="hover:underline">info@parts.com</a>

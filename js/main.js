@@ -29,9 +29,7 @@ document.addEventListener('DOMContentLoaded', () => {
         updateIcon();
     });
 
-    updateIcon(); // Actualiza el icono según el tema actual al cargar la página
-    // Obtener la URL actual sin el dominio
-    // Obtiene todos los elementos de enlace del navbar
+    updateIcon();
     const links = document.querySelectorAll('nav a');
 
     // Obtiene la ruta actual del navegador
@@ -54,15 +52,15 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    var checkboxes = document.querySelectorAll('.product-checkbox');
+    const checkboxes = document.querySelectorAll('.product-checkbox');
 
     checkboxes.forEach(function (checkbox) {
         checkbox.addEventListener('change', function () {
-            var total = 0;
+            let total = 0;
 
             document.querySelectorAll('.product-checkbox:checked').forEach(function (checkedBox) {
-                var priceText = checkedBox.closest('tr').querySelector('.product-price').innerText;
-                var price = parseInt(priceText.replace('$', '').replace(/\./g, ''), 10);
+                let priceText = checkedBox.closest('tr').querySelector('.product-price').innerText;
+                let price = parseInt(priceText.replace('$', '').replace(/\./g, ''), 10);
                 total += price;
             });
 
@@ -70,3 +68,123 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 });
+
+document.addEventListener('DOMContentLoaded', function () {
+    const emailInput = document.getElementById('email');
+    const subjectInput = document.getElementById('subject');
+    const phoneInput = document.getElementById('phone');
+    const messageInput = document.getElementById('message');
+    const fileInput = document.getElementById('file_user');
+    const submitButton = document.getElementById('submit-button');
+    const formSubmitDone = document.getElementById('form-submit');
+
+    function validateEmail() {
+        const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+        const emailError = document.getElementById('email-error');
+        if (!emailPattern.test(emailInput.value)) {
+            emailError.textContent = 'Por favor, ingrese un correo válido';
+            return false;
+        } else {
+            emailError.textContent = '';
+            return true;
+        }
+    }
+
+    function validateSubject() {
+        const subjectError = document.getElementById('subject-error');
+        if (subjectInput.value.length < 5) {
+            subjectError.textContent = 'El asunto debe tener al menos 5 caracteres';
+            return false;
+        } else {
+            subjectError.textContent = '';
+            return true;
+        }
+    }
+
+    function validatePhone() {
+        const phonePattern = /^\+569\d{8}$/;
+        const phoneError = document.getElementById('phone-error');
+        if (!phonePattern.test(phoneInput.value)) {
+            phoneError.textContent = 'El teléfono debe comenzar con +569 y tener 8 dígitos en total';
+            return false;
+        } else {
+            phoneError.textContent = '';
+            return true;
+        }
+    }
+
+    function validateMessage() {
+        const messageError = document.getElementById('message-error');
+        if (messageInput.value.length < 40) {
+            messageError.textContent = 'El mensaje debe tener al menos 40 caracteres';
+            return false;
+        } else {
+            messageError.textContent = '';
+            return true;
+        }
+    }
+
+    function validateFile() {
+        const file = fileInput.files[0];
+        const allowedExtensions = ['pdf', 'png', 'jpg', 'jpeg'];
+        const fileError = document.getElementById('file-user-error');
+        const maxSizeInBytes = 5 * 1024 * 1024;
+        const fileExtension = file ? file.name.split('.').pop().toLowerCase() : '';
+
+        if (!file) {
+            return true;
+        } else if (!allowedExtensions.includes(fileExtension)) {
+            fileError.textContent = 'El archivo debe ser un PDF, PNG, JPG o JPEG';
+            return false;
+        } else if (file.size > maxSizeInBytes) {
+            fileError.textContent = 'El archivo no debe superar los 5 MB';
+            return false;
+        } else {
+            fileError.textContent = '';
+            return true;
+        }
+    }
+
+    function toggleSubmitButtonState(isValid) {
+        const submitButton = document.getElementById('submit-button');
+        if (isValid) {
+            submitButton.disabled = false;
+            submitButton.classList.remove('bg-gray-500', 'cursor-not-allowed');
+            submitButton.classList.add('bg-blue-700', 'hover:bg-blue-800', 'dark:bg-blue-600', 'dark:hover:bg-blue-700');
+        } else {
+            submitButton.disabled = true;
+            submitButton.classList.remove('bg-blue-700', 'hover:bg-blue-800', 'dark:bg-blue-600', 'dark:hover:bg-blue-700');
+            submitButton.classList.add('bg-gray-500', 'cursor-not-allowed');
+        }
+    }
+
+    function validateForm() {
+        const isValid = validateEmail() && validateSubject() && validatePhone() && validateMessage() && validateFile();
+        toggleSubmitButtonState(isValid);
+        return isValid;
+    }
+
+    emailInput.addEventListener('blur', validateEmail);
+    subjectInput.addEventListener('blur', validateSubject);
+    phoneInput.addEventListener('blur', validatePhone);
+    messageInput.addEventListener('blur', validateMessage);
+    fileInput.addEventListener('change', validateFile);
+
+    document.getElementById('contactForm').addEventListener('input', validateForm);
+
+    document.getElementById('contactForm').addEventListener('submit', function (event) {
+        event.preventDefault();
+        if (validateForm()) {
+            formSubmitDone.classList.remove('hidden');
+        } else {
+            formSubmitDone.classList.add('hidden');
+        }
+    });
+});
+
+async function getCiudad() {
+    const request = await fetch("https://ipinfo.io/json?token=06ba880eb2387d")
+    const jsonResponse = await request.json()
+    console.log(jsonResponse)
+    return jsonResponse.country;
+}
