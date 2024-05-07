@@ -76,7 +76,19 @@ document.addEventListener('DOMContentLoaded', function () {
     const messageInput = document.getElementById('message');
     const fileInput = document.getElementById('file_user');
     const submitButton = document.getElementById('submit-button');
-    const formSubmitDone = document.getElementById('form-submit');
+    const formSuccess = document.getElementById('form-submit');
+
+    function toggleSubmitButtonState(isValid) {
+        if (isValid) {
+            submitButton.disabled = false;
+            submitButton.classList.remove('bg-gray-500', 'cursor-not-allowed');
+            submitButton.classList.add('bg-blue-700', 'hover:bg-blue-800', 'dark:bg-blue-600', 'dark:hover:bg-blue-700');
+        } else {
+            submitButton.disabled = true;
+            submitButton.classList.remove('bg-blue-700', 'hover:bg-blue-800', 'dark:bg-blue-600', 'dark:hover:bg-blue-700');
+            submitButton.classList.add('bg-gray-500', 'cursor-not-allowed');
+        }
+    }
 
     function validateEmail() {
         const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
@@ -105,7 +117,7 @@ document.addEventListener('DOMContentLoaded', function () {
         const phonePattern = /^\+569\d{8}$/;
         const phoneError = document.getElementById('phone-error');
         if (!phonePattern.test(phoneInput.value)) {
-            phoneError.textContent = 'El teléfono debe comenzar con +569 y tener 8 dígitos en total';
+            phoneError.textContent = 'El teléfono debe comenzar con +569 y tener 9 dígitos en total';
             return false;
         } else {
             phoneError.textContent = '';
@@ -145,23 +157,17 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
-    function toggleSubmitButtonState(isValid) {
-        const submitButton = document.getElementById('submit-button');
-        if (isValid) {
-            submitButton.disabled = false;
-            submitButton.classList.remove('bg-gray-500', 'cursor-not-allowed');
-            submitButton.classList.add('bg-blue-700', 'hover:bg-blue-800', 'dark:bg-blue-600', 'dark:hover:bg-blue-700');
-        } else {
-            submitButton.disabled = true;
-            submitButton.classList.remove('bg-blue-700', 'hover:bg-blue-800', 'dark:bg-blue-600', 'dark:hover:bg-blue-700');
-            submitButton.classList.add('bg-gray-500', 'cursor-not-allowed');
-        }
-    }
-
     function validateForm() {
-        const isValid = validateEmail() && validateSubject() && validatePhone() && validateMessage() && validateFile();
-        toggleSubmitButtonState(isValid);
-        return isValid;
+        const isEmailValid = validateEmail();
+        const isSubjectValid = validateSubject();
+        const isPhoneValid = validatePhone();
+        const isMessageValid = validateMessage();
+        const isFileValid = validateFile();
+
+        const isFormValid = isEmailValid && isSubjectValid && isPhoneValid && isMessageValid && isFileValid;
+        toggleSubmitButtonState(isFormValid);
+
+        return isFormValid;
     }
 
     emailInput.addEventListener('blur', validateEmail);
@@ -175,16 +181,9 @@ document.addEventListener('DOMContentLoaded', function () {
     document.getElementById('contactForm').addEventListener('submit', function (event) {
         event.preventDefault();
         if (validateForm()) {
-            formSubmitDone.classList.remove('hidden');
+            formSuccess.classList.remove('hidden');
         } else {
-            formSubmitDone.classList.add('hidden');
+            formSuccess.classList.add('hidden');
         }
     });
 });
-
-async function getCiudad() {
-    const request = await fetch("https://ipinfo.io/json?token=06ba880eb2387d")
-    const jsonResponse = await request.json()
-    console.log(jsonResponse)
-    return jsonResponse.country;
-}
