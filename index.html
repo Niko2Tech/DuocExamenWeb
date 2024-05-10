@@ -68,7 +68,7 @@
                         </path>
                     </svg>
                 </button>
-                <button data-modal-target="modalUser" data-modal-toggle="modalUser" type="button"
+                <button data-modal-target="modalUser" data-modal-toggle="modalUser" type="button" id="user-button"
                     class="inline-flex cursor-pointer items-center justify-center p-2 w-10 h-10 text-sm text-gray-500 rounded-lg hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" stroke="currentColor">
                         <path fill="currentColor"
@@ -447,8 +447,8 @@
             <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
                 <!-- Modal header -->
                 <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
-                    <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
-                        Bienvenido
+                    <h3 class="text-xl font-semibold text-gray-900 dark:text-white" id="saludo">
+
                     </h3>
                     <button type="button"
                         class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
@@ -462,12 +462,27 @@
                     </button>
                 </div>
                 <!-- Modal body -->
-                <div>
-
+                <div
+                    class="flex flex-col items-center justify-center p-4 md:p-5 border-b rounded-t dark:border-gray-600">
+                    <picture id="foto-perfil">
+                        <source id="foto-src" srcset="" type="image/jpg">
+                        <img id="foto-img" src="" class="w-32 h-32 rounded-full" />
+                    </picture>
+                    <div class="flex justify-between items-center gap-8">
+                        <p class="text-xl text-gray-900 dark:text-white" id="correo"></p>
+                        <p class="text-xl text-gray-500 dark:text-gray-400" id="telefono"></p>
+                    </div>
+                    <div class="flex flex-col">
+                        <h4 class="text-sm text-gray-900 dark:text-white py-4 text-center">Ultima conexion</h4>
+                        <div class="flex gap-8">
+                            <p id="ip" class="text-base text-gray-900 dark:text-gray-400"></p>
+                            <p id="pais" class="text-base text-gray-500 dark:text-gray-400"></p>
+                        </div>
+                    </div>
                 </div>
                 <!-- Modal footer -->
                 <div
-                    class="flex items-center p-4 md:p-5 border-t border-gray-200 rounded-b dark:border-gray-600 justify-between">
+                    class="flex items-center p-4 md:p-5 border-t border-gray-200 rounded-b dark:border-gray-600 justify-end">
                     <button data-modal-hide="modalUser" type="button"
                         class="py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 bg-gray-100 rounded-lg dark:bg-gray-700 dark:text-white">Cerrar
                     </button>
@@ -475,7 +490,6 @@
             </div>
         </div>
     </div>
-
     <div>
         <div id="modalCarrito" tabindex="-1" aria-hidden="true"
             class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
@@ -573,6 +587,7 @@
         </div>
     </div>
     <script src="js/main.js"></script>
+    <script src="js/apis.js"></script>
 </body>
 
 </html>
